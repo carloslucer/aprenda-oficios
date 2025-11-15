@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendé un Oficio Hoy - Responsive</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-neon: #39ff88;
+            --blanco: #ffffff;
+            --gris-claro: #cccccc;
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
+            color: var(--blanco);
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--gris-claro);
+        }
+
+        .animate-in-element {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .video-block {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5),
+                        inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-hidden">
+
+    <!-- Fondo -->
+    <div class="absolute inset-0 bg-[url('fondo.jpeg')] bg-cover bg-center bg-fixed"></div>
+    <div class="absolute inset-0 bg-black/65"></div>
+
+    <!-- Contenido -->
+    <div id="content-container"
+        class="relative z-10 flex flex-col items-center text-center text-white space-y-6 md:space-y-4 p-6 w-full max-w-sm md:max-w-xl lg:max-w-2xl">
+
+        <!-- Título -->
+        <h1 class="animate-in-element text-4xl md:text-4xl font-extrabold leading-tight"
+            style="transition-delay: 0.3s;">
+            Aprendé un oficio hoy
+        </h1>
+
+        <!-- Video -->
+        <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl"
+            style="transition-delay: 0.5s;">
+            <div class="relative aspect-video bg-neutral-800 video-block rounded-xl">
+                <iframe class="absolute inset-0 w-full h-full rounded-xl"
+                    src="https://www.youtube.com/embed/Cui6NdK18qs"
+                    title="Video" frameborder="0" loading="lazy"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Texto -->
+        <p class="animate-in-element text-xl md:text-lg font-medium"
+            style="transition-delay: 0.7s;">
+            Comenzá y terminá el curso intensivo hoy
+        </p>
+
+        <!-- Botón -->
+        <button onclick="console.log('Curso Comprado!');"
+            class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
+            style="transition-delay: 0.9s; background-color: var(--verde-neon);">
+            COMPRAR CURSO
+        </button>
+
+        <!-- Icono -->
+        <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
+            style="transition-delay:.85s">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+            </svg>
+            <span>Acceso inmediato al campus</span>
+        </div>
+
+    </div>
+
+    <script>
+        function runEntranceAnimation() {
+            const elements = document.querySelectorAll('.animate-in-element');
+            setTimeout(() => {
+                elements.forEach(el => el.classList.add('is-visible'));
+            }, 50);
+        }
+        window.onload = runEntranceAnimation;
+    </script>
+
+</body>
+
+</html>
