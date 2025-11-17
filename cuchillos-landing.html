@@ -2,121 +2,153 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aprendé un Oficio Hoy </title>
-     
-    
-    <!-- Tailwind CDN -->
-    <link rel="stylesheet" href="/static/app.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprendé un Oficio Hoy</title>
 
+  <!-- CSS principal (Tailwind compilado) -->
+  <link rel="stylesheet" href="/static/app.min.css">
 
-    <!-- Fuentes -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Preconnect para acelerar Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <style>
-        :root {
-            --verde-neon: #39ff88;
-            --blanco: #ffffff;
-            --gris-claro: #cccccc;
-        }
+  <!-- Fuentes -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet">
 
-        body {
-            font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
-            color: var(--blanco);
-        }
+  <style>
+    :root {
+      --verde-neon: #39ff88;
+      --blanco: #ffffff;
+      --gris-claro: #cccccc;
+    }
 
-        h1 {
-            font-weight: 700;
-        }
+    body {
+      font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
+      color: var(--blanco);
+    }
 
-        p {
-            color: var(--gris-claro);
-        }
+    h1 {
+      font-weight: 700;
+    }
 
-        .animate-in-element {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
+    p {
+      color: var(--gris-claro);
+    }
 
-        .animate-in-element.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+    .animate-in-element {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
 
-        .video-block {
-            box-shadow:
-                0 4px 10px rgba(0, 0, 0, 0.5),
-                inset 0 0 15px rgba(255, 255, 255, 0.05);
-        }
-    </style>
+    .animate-in-element.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .video-block {
+      box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.5),
+        inset 0 0 15px rgba(255, 255, 255, 0.05);
+    }
+  </style>
 </head>
 
 <body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-hidden">
 
-    <!-- Fondo -->
-    <div class="absolute inset-0 bg-[url('/static/fondo.webp')] bg-cover bg-center bg-fixed"></div>
-    <div class="absolute inset-0 bg-black/65"></div>
+  <!-- Fondo -->
+  <div class="absolute inset-0 bg-[url('/static/fondo.webp')] bg-cover bg-center bg-fixed"></div>
+  <div class="absolute inset-0 bg-black/65"></div>
 
-    <!-- Contenido -->
-    <div id="content-container"
-        class="relative z-10 flex flex-col items-center text-center text-white space-y-6 md:space-y-4 p-6 w-full max-w-sm md:max-w-xl lg:max-w-2xl">
+  <!-- Contenido -->
+  <div id="content-container"
+    class="relative z-10 flex flex-col items-center text-center text-white space-y-6 md:space-y-4 p-6 w-full max-w-sm md:max-w-xl lg:max-w-2xl">
 
-        <!-- Título -->
-        <h1 class="animate-in-element text-4xl md:text-4xl font-extrabold leading-tight"
-            style="transition-delay: 0.05s;">
-            Aprendé un oficio hoy
-        </h1>
+    <!-- Título -->
+    <h1 class="animate-in-element text-4xl md:text-4xl font-extrabold leading-tight" style="transition-delay: 0.05s;">
+      Aprendé un oficio hoy
+    </h1>
 
-        <!-- Video -->
-        <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl"
-            style="transition-delay: 0.15s;">
-            <div class="relative aspect-video bg-neutral-800 video-block rounded-xl">
-                <iframe class="absolute inset-0 w-full h-full rounded-xl"
-                    src="https://www.youtube.com/embed/Cui6NdK18qs"
-                    title="Video" frameborder="0" loading="lazy"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
+    <!-- Video (placeholder hasta que el usuario haga clic) -->
+    <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl" style="transition-delay: 0.15s;">
+      <div id="video-container"
+        class="relative aspect-video bg-neutral-800 video-block rounded-xl overflow-hidden cursor-pointer">
 
-        <!-- Texto -->
-        <p class="animate-in-element text-xl md:text-lg font-medium"
-            style="transition-delay: 0.25s;">
-            Comenzá y terminá el curso intensivo hoy
-        </p>
+        <!-- Miniatura de YouTube -->
+        <img
+          src="https://img.youtube.com/vi/Cui6NdK18qs/hqdefault.jpg"
+          alt="Video: Aprendé un oficio hoy"
+          class="w-full h-full object-cover"
+          loading="lazy">
 
-        <!-- Botón -->
-        <button onclick="console.log('Curso Comprado!');"
-            class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
-            style="transition-delay: 0.35s; background-color: var(--verde-neon);">
-            COMPRAR CURSO
-        </button>
-
-        <!-- Icono -->
-        <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
-            style="transition-delay: 0.50s">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+        <!-- Capa oscura + botón de play -->
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="bg-black/60 rounded-full p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
             </svg>
-            <span>Acceso inmediato al campus</span>
+          </div>
         </div>
-
+      </div>
     </div>
 
-    <script>
-        function runEntranceAnimation() {
-            const elements = document.querySelectorAll('.animate-in-element');
-            elements.forEach(el => el.classList.add('is-visible'));
-        }
+    <!-- Texto -->
+    <p class="animate-in-element text-xl md:text-lg font-medium" style="transition-delay: 0.25s;">
+      Comenzá y terminá el curso intensivo hoy
+    </p>
 
-        // Antes: window.onload = runEntranceAnimation;
-        // Ahora: apenas el DOM esté listo, sin esperar imágenes/YouTube
-        document.addEventListener('DOMContentLoaded', runEntranceAnimation);
-    </script>
+    <!-- Botón -->
+    <button onclick="console.log('Curso Comprado!');"
+      class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
+      style="transition-delay: 0.35s; background-color: var(--verde-neon);">
+      COMPRAR CURSO
+    </button>
+
+    <!-- Icono -->
+    <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
+      style="transition-delay: 0.50s">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+      </svg>
+      <span>Acceso inmediato al campus</span>
+    </div>
+
+  </div>
+
+  <script>
+    function runEntranceAnimation() {
+      const elements = document.querySelectorAll('.animate-in-element');
+      elements.forEach(el => el.classList.add('is-visible'));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animación de entrada apenas el DOM está listo
+      runEntranceAnimation();
+
+      // Cargar YouTube SOLO cuando el usuario hace clic
+      const videoContainer = document.getElementById('video-container');
+      if (videoContainer) {
+        videoContainer.addEventListener('click', () => {
+          videoContainer.innerHTML = `
+            <iframe
+              class="absolute inset-0 w-full h-full rounded-xl"
+              src="https://www.youtube.com/embed/Cui6NdK18qs?autoplay=1"
+              title="Video"
+              frameborder="0"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          `;
+        }, { once: true });
+      }
+    });
+  </script>
 
 </body>
 
