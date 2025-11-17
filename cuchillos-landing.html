@@ -7,17 +7,21 @@
     <title>Aprendé un Oficio Hoy</title>
 
     <!-- CSS principal (Tailwind compilado) -->
-    <!-- <link rel="stylesheet" href="/static/app.min.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Preconnect para acelerar Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Fuentes -->
-    <link
+    <!-- Fuentes (carga menos bloqueante) -->
+    <link rel="preload"
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap"
-        rel="stylesheet">
+        as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
     <style>
         :root {
@@ -60,7 +64,6 @@
 
 <body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-x-hidden">
 
-
     <!-- Fondo -->
     <div class="absolute inset-0 bg-[url('/static/fondo.webp')] bg-cover bg-center bg-fixed"></div>
     <div class="absolute inset-0 bg-black/65"></div>
@@ -82,7 +85,7 @@
 
                 <!-- Miniatura de YouTube -->
                 <img src="https://img.youtube.com/vi/Cui6NdK18qs/hqdefault.jpg" alt="Video: Aprendé un oficio hoy"
-                    class="w-full h-full object-cover" loading="lazy">
+                    class="w-full h-full object-cover" loading="lazy" decoding="async">
 
                 <!-- Capa oscura + botón de play -->
                 <div class="absolute inset-0 flex items-center justify-center">
@@ -124,10 +127,10 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 text-left w-full">
                 <div>
                     <p class="text-xs uppercase tracking-[0.18em] text-[var(--gris-claro)] mb-1">
-                       HISTORIAS REALES
+                        HISTORIAS REALES
                     </p>
                     <h2 class="text-2xl md:text-2xl font-extrabold text-white">
-                        Testimonios 
+                        Testimonios
                     </h2>
                 </div>
                 <p class="text-[0.75rem] md:text-xs text-[var(--gris-claro)] md:text-right">
@@ -377,13 +380,12 @@
             </div>
         </section>
 
-
         <!-- SECCIÓN INFORMATIVA: EL AFILADO PROFESIONAL -->
         <section class="animate-in-element w-full space-y-4 md:space-y-6 text-left" style="transition-delay: 0.75s;">
 
-
             <div
                 class="bg-black/90 border border-white/30 rounded-xl p-6 md:p-8 backdrop-blur-sm text-sm md:text-base text-[#cccccc] leading-relaxed space-y-4">
+
                 <h2 class="text-2xl md:text-3xl font-extrabold text-white text-center">
                     El Afilado Profesional: Tu Camino a la Independencia Financiera
                 </h2>
@@ -410,7 +412,6 @@
                     <p class="mb-1 text-lg text-[var(--verde-neon)]">💸 Un oficio real, con precios reales:</p>
                     <p>
                         <span class="block">💰 $6.000 a $12.000 por cuchillo.</span>
-
                     </p>
                 </div>
 
@@ -421,23 +422,24 @@
                     entre
                     <strong>$30.000</strong> y <strong>$60.000</strong>.
                 </div>
+
                 <button onclick="console.log('Curso Comprado!');"
                     class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
                     style="transition-delay: 0.35s; background-color: var(--verde-neon);">
                     COMPRAR CURSO
                 </button>
-             <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
-            style="transition-delay: 0.50s">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
-            </svg>
-            <span>Acceso inmediato al campus</span>
-        </div>
-            
-        </section>
 
+                <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
+                    style="transition-delay: 0.50s">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+                    </svg>
+                    <span>Acceso inmediato al campus</span>
+                </div>
+            </div>
+        </section>
 
     </div>
 
