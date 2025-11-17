@@ -2,139 +2,460 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aprendé un Oficio Hoy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendé un Oficio Hoy</title>
 
-  <!-- CSS principal (Tailwind compilado) -->
-  <link rel="stylesheet" href="/static/app.min.css">
+    <!-- CSS principal (Tailwind compilado) -->
+    <!-- <link rel="stylesheet" href="/static/app.min.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Preconnect para acelerar Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preconnect para acelerar Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Fuentes -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap"
-    rel="stylesheet">
+    <!-- Fuentes -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
-  <style>
-    :root {
-      --verde-neon: #39ff88;
-      --blanco: #ffffff;
-      --gris-claro: #cccccc;
-    }
+    <style>
+        :root {
+            --verde-neon: #39ff88;
+            --blanco: #ffffff;
+            --gris-claro: #cccccc;
+        }
 
-    body {
-      font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
-      color: var(--blanco);
-    }
+        body {
+            font-family: 'Poppins', 'Inter', 'Montserrat', sans-serif;
+            color: var(--blanco);
+        }
 
-    h1 {
-      font-weight: 700;
-    }
+        h1 {
+            font-weight: 700;
+        }
 
-    p {
-      color: var(--gris-claro);
-    }
+        p {
+            color: var(--gris-claro);
+        }
 
-    .animate-in-element {
-      opacity: 0;
-      transform: translateY(20px) scale(0.95);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
+        .animate-in-element {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
 
-    .animate-in-element.is-visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+        .animate-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
 
-    .video-block {
-      box-shadow:
-        0 4px 10px rgba(0, 0, 0, 0.5),
-        inset 0 0 15px rgba(255, 255, 255, 0.05);
-    }
-  </style>
+        .video-block {
+            box-shadow:
+                0 4px 10px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+    </style>
 </head>
 
-<body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-hidden">
+<body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-x-hidden">
 
-  <!-- Fondo -->
-  <div class="absolute inset-0 bg-[url('/static/fondo.webp')] bg-cover bg-center bg-fixed"></div>
-  <div class="absolute inset-0 bg-black/65"></div>
 
-  <!-- Contenido -->
-  <div id="content-container"
-    class="relative z-10 flex flex-col items-center text-center text-white space-y-6 md:space-y-4 p-6 w-full max-w-sm md:max-w-xl lg:max-w-2xl">
+    <!-- Fondo -->
+    <div class="absolute inset-0 bg-[url('/static/fondo.webp')] bg-cover bg-center bg-fixed"></div>
+    <div class="absolute inset-0 bg-black/65"></div>
 
-    <!-- Título -->
-    <h1 class="animate-in-element text-4xl md:text-4xl font-extrabold leading-tight" style="transition-delay: 0.05s;">
-      Aprendé un oficio hoy
-    </h1>
+    <!-- Contenido -->
+    <div id="content-container"
+        class="relative z-10 flex flex-col items-center text-center text-white space-y-6 md:space-y-4 p-6 w-full max-w-sm md:max-w-xl lg:max-w-2xl">
 
-    <!-- Video (placeholder hasta que el usuario haga clic) -->
-    <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl" style="transition-delay: 0.15s;">
-      <div id="video-container"
-        class="relative aspect-video bg-neutral-800 video-block rounded-xl overflow-hidden cursor-pointer">
+        <!-- Título -->
+        <h1 class="animate-in-element text-4xl md:text-4xl font-extrabold leading-tight"
+            style="transition-delay: 0.05s;">
+            Aprendé un oficio hoy
+        </h1>
 
-        <!-- Miniatura de YouTube -->
-        <img
-          src="https://img.youtube.com/vi/Cui6NdK18qs/hqdefault.jpg"
-          alt="Video: Aprendé un oficio hoy"
-          class="w-full h-full object-cover"
-          loading="lazy">
+        <!-- Video (placeholder hasta que el usuario haga clic) -->
+        <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl" style="transition-delay: 0.15s;">
+            <div id="video-container"
+                class="relative aspect-video bg-neutral-800 video-block rounded-xl overflow-hidden cursor-pointer">
 
-        <!-- Capa oscura + botón de play -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="bg-black/60 rounded-full p-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
+                <!-- Miniatura de YouTube -->
+                <img src="https://img.youtube.com/vi/Cui6NdK18qs/hqdefault.jpg" alt="Video: Aprendé un oficio hoy"
+                    class="w-full h-full object-cover" loading="lazy">
+
+                <!-- Capa oscura + botón de play -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-black/60 rounded-full p-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Texto -->
+        <p class="animate-in-element text-xl md:text-lg font-medium" style="transition-delay: 0.25s;">
+            Comenzá y terminá el curso intensivo hoy
+        </p>
+
+        <!-- Botón -->
+        <button onclick="console.log('Curso Comprado!');"
+            class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
+            style="transition-delay: 0.35s; background-color: var(--verde-neon);">
+            COMPRAR CURSO
+        </button>
+
+        <!-- Icono -->
+        <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
+            style="transition-delay: 0.50s">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+            </svg>
+            <span>Acceso inmediato al campus</span>
+        </div>
+
+        <!-- SECCIÓN TESTIMONIOS -->
+        <section class="animate-in-element w-full pt-20 space-y-4 md:space-y-6" style="transition-delay: 0.65s;">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 text-left w-full">
+                <div>
+                    <p class="text-xs uppercase tracking-[0.18em] text-[var(--gris-claro)] mb-1">
+                       HISTORIAS REALES
+                    </p>
+                    <h2 class="text-2xl md:text-2xl font-extrabold text-white">
+                        Testimonios 
+                    </h2>
+                </div>
+                <p class="text-[0.75rem] md:text-xs text-[var(--gris-claro)] md:text-right">
+                    Alumnos que ya están generando ingresos con el oficio de afilador.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 text-left">
+                <!-- Testimonio 1 -->
+                <article
+                    class="bg-black/70 border border-white/5 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                M
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Martín R.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Córdoba · Alumno del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Alumno verificado
+                        </span>
+                    </div>
+
+                    <!-- Cuerpo -->
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        <span class="font-semibold text-white">“No podía creer lo rápido que empecé a ver
+                            resultados.”</span>
+                        Terminé el curso en un día, practiqué, y al día siguiente ya tenía encargos de mis vecinos.
+                        En <span class="font-semibold text-[var(--verde-neon)]">48 horas ya estaba facturando</span>, es
+                        impresionante.
+                    </p>
+                </article>
+
+                <!-- Testimonio 2 -->
+                <article
+                    class="bg-black/70 border border-white/5 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                L
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Laura S.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Rosario · Alumna del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Caso de éxito
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Siempre quise tener mi propio negocio, pero no sabía por dónde empezar.
+                        La máquina recomendada en el curso, aunque no es la más barata del mercado, es
+                        <span class="font-semibold text-white">increíblemente práctica y duradera</span>.
+                        Cuesta menos de lo que uno cree, dura para siempre y
+                        <span class="font-semibold text-[var(--verde-neon)]">se paga sola en pocos días</span>.
+                        Ahora <span class="font-semibold">soy mi propio jefe</span>.
+                    </p>
+                </article>
+
+                <!-- Testimonio 3 -->
+                <article
+                    class="bg-black/70 border border-white/5 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                D
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Diego M.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Mendoza · Alumno del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            De hobby a ingreso
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Tenía una máquina de afilar guardada en el garaje por meses, sin saber cómo usarla realmente.
+                        El fabricante nunca explicó bien. Gracias al curso, la desempolvé y en cuestión de días empecé a
+                        facturar.
+                        <span class="font-semibold text-white">Estaba sentado sobre una mina de oro</span> sin saberlo.
+                    </p>
+                </article>
+
+                <!-- Testimonio 4 -->
+                <article
+                    class="bg-black/70 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                S
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Sofía P.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Buenos Aires · Alumna del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Cambio de vida
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Estuve meses sin trabajo, estancada, desmotivada. El curso me dio una habilidad real que pude
+                        empezar
+                        a aplicar esa misma semana. Me devolvió la confianza y la esperanza.
+                        <span class="font-semibold text-white">El curso me dio un oficio</span>, pero más valioso aún:
+                        <span class="font-semibold text-[var(--verde-neon)]">me devolvió la dignidad</span>. El trabajo
+                        dignifica.
+                    </p>
+                </article>
+
+                <!-- Testimonio 5 -->
+                <article
+                    class="bg-black/70 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                J
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Juan C.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Neuquén · Alumno del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Ingreso extra
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Tengo mi trabajo fijo de lunes a viernes. Durante la semana junto los cuchillos de mis amigos y
+                        vecinos,
+                        y los afilo los fines de semana. Fácilmente genero
+                        <span class="font-semibold text-[var(--verde-neon)]">$25.000–$70.000 extras cada finde</span>.
+                        ¡Espero que saquen el curso para afilar tijeras, lo voy a comprar apenas salga!
+                    </p>
+                </article>
+
+                <!-- Testimonio 6 -->
+                <article
+                    class="bg-black/70 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                A
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Ana G.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">La Plata · Alumna del curso</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Puesto en feria
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        ¡El puesto de afilado en la feria es un éxito total! Monto mi stand de viernes a domingo y afilo
+                        entre
+                        <span class="font-semibold text-white">20 y 40 cuchillos por día</span>.
+                        La gente se junta a mirar cómo lo hago y muestro el antes y después cortando papel.
+                        Ya todos saben que estoy ahí. <span class="font-semibold text-[var(--verde-neon)]">Me cambió el
+                            mes.</span>
+                    </p>
+                </article>
+
+                <!-- Testimonio 7 -->
+                <article
+                    class="bg-black/70 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                R
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Ricardo V.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">CABA · Chef y alumno</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Profesional gastronómico
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Como cocinero profesional, gastaba una fortuna enviando mis cuchillos y los de la cocina a
+                        afilar.
+                        Con el curso, aprendí la técnica perfecta. Ahora los afilo yo mismo, y hasta les hago el
+                        servicio
+                        a mis compañeros del restaurante. <span class="font-semibold text-white">Es un ahorro
+                            enorme</span> y
+                        una herramienta invaluable en mi profesión.
+                    </p>
+                </article>
+
+                <!-- Testimonio 8 -->
+                <article
+                    class="bg-black/70 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm flex flex-col justify-between h-full shadow-lg shadow-black/40 hover:-translate-y-1 hover:shadow-xl transition">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-xs font-semibold text-white">
+                                V
+                            </div>
+                            <div class="leading-tight">
+                                <p class="text-xs font-semibold text-white">Valentina M.</p>
+                                <p class="text-[0.7rem] text-[#cccccc]/80">Salta · Emprendedora</p>
+                            </div>
+                        </div>
+                        <span
+                            class="text-[0.65rem] px-2 py-1 rounded-full bg-emerald-500/15 text-[var(--verde-neon)] border border-emerald-400/40">
+                            Emprendimiento local
+                        </span>
+                    </div>
+
+                    <p class="text-sm md:text-[0.9rem] leading-relaxed mb-3">
+                        Buscaba una forma de emprender sin tener que invertir una fortuna, y este curso fue la solución.
+                        Con poco más que la máquina y mi habilidad, conseguí clientes en todo el barrio usando carteles
+                        y WhatsApp.
+                        <span class="font-semibold text-[var(--verde-neon)]">Recuperé la inversión en poquísimos
+                            días</span> y ahora
+                        estoy armando mi propia cartera de clientes.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN INFORMATIVA: EL AFILADO PROFESIONAL -->
+        <section class="animate-in-element w-full space-y-4 md:space-y-6 text-left" style="transition-delay: 0.75s;">
+
+
+            <div
+                class="bg-black/90 border border-white/30 rounded-xl p-6 md:p-8 backdrop-blur-sm text-sm md:text-base text-[#cccccc] leading-relaxed space-y-4">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-white text-center">
+                    El Afilado Profesional: Tu Camino a la Independencia Financiera
+                </h2>
+                <p>
+                    Este curso te ofrece una oportunidad real para transformar tu futuro.
+                    Adquiere una habilidad esencial y altamente lucrativa: el afilado profesional.
+                    Diseñado para quienes buscan independencia financiera y un oficio con demanda constante,
+                    te transformarás de principiante absoluto en un experto sin necesidad de experiencia previa.
+                </p>
+                <p>
+                    Aprenderás el método probado de <strong>El Muchacho que Afila de Trelew</strong>,
+                    un referente en el sector que ha guiado a innumerables estudiantes a dominar el arte del filo.
+                    Su enfoque práctico te permitirá adquirir las técnicas esenciales de forma rápida y efectiva.
+                </p>
+                <p>
+                    El afilado es un servicio fundamental con demanda sostenida y sorprendentemente baja competencia en
+                    el mercado actual.
+                    Es un oficio con barreras de entrada mínimas, sin requerir costosas inversiones iniciales en equipos
+                    o maquinaria compleja.
+                    Es tu oportunidad de ingresar a un sector esencial con alta rentabilidad.
+                </p>
+
+                <div class="bg-white/5 border border-white/10 p-4 rounded-lg text-white text-sm font-semibold">
+                    <p class="mb-1 text-lg text-[var(--verde-neon)]">💸 Un oficio real, con precios reales:</p>
+                    <p>
+                        <span class="block">💰 $6.000 a $12.000 por cuchillo.</span>
+
+                    </p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 p-4 rounded-lg text-white text-sm font-semibold">
+                    En Argentina, un afilador profesional puede cobrar entre <strong>$6.000</strong> y
+                    <strong>$12.000</strong> por cuchillo.
+                    Imaginá el potencial: afilando tan solo 5 cuchillos al día, podrías generar ingresos diarios de
+                    entre
+                    <strong>$30.000</strong> y <strong>$60.000</strong>.
+                </div>
+                <button onclick="console.log('Curso Comprado!');"
+                    class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
+                    style="transition-delay: 0.35s; background-color: var(--verde-neon);">
+                    COMPRAR CURSO
+                </button>
+             <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
+            style="transition-delay: 0.50s">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
+            </svg>
+            <span>Acceso inmediato al campus</span>
+        </div>
+            
+        </section>
+
+
     </div>
 
-    <!-- Texto -->
-    <p class="animate-in-element text-xl md:text-lg font-medium" style="transition-delay: 0.25s;">
-      Comenzá y terminá el curso intensivo hoy
-    </p>
+    <script>
+        function runEntranceAnimation() {
+            const elements = document.querySelectorAll('.animate-in-element');
+            elements.forEach(el => el.classList.add('is-visible'));
+        }
 
-    <!-- Botón -->
-    <button onclick="console.log('Curso Comprado!');"
-      class="animate-in-element w-full py-3 md:py-3 text-black font-extrabold text-lg md:text-base uppercase rounded-xl transition duration-300 hover:bg-green-300"
-      style="transition-delay: 0.35s; background-color: var(--verde-neon);">
-      COMPRAR CURSO
-    </button>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animación de entrada apenas el DOM está listo
+            runEntranceAnimation();
 
-    <!-- Icono -->
-    <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
-      style="transition-delay: 0.50s">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-3A2.25 2.25 0 008.25 5.25V9m9 0H6.75m12 0v9A2.25 2.25 0 0116.5 20.25h-9A2.25 2.25 0 015.25 18V9m12 0H6.75" />
-      </svg>
-      <span>Acceso inmediato al campus</span>
-    </div>
-
-  </div>
-
-  <script>
-    function runEntranceAnimation() {
-      const elements = document.querySelectorAll('.animate-in-element');
-      elements.forEach(el => el.classList.add('is-visible'));
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Animación de entrada apenas el DOM está listo
-      runEntranceAnimation();
-
-      // Cargar YouTube SOLO cuando el usuario hace clic
-      const videoContainer = document.getElementById('video-container');
-      if (videoContainer) {
-        videoContainer.addEventListener('click', () => {
-          videoContainer.innerHTML = `
+            // Cargar YouTube SOLO cuando el usuario hace clic
+            const videoContainer = document.getElementById('video-container');
+            if (videoContainer) {
+                videoContainer.addEventListener('click', () => {
+                    videoContainer.innerHTML = `
             <iframe
               class="absolute inset-0 w-full h-full rounded-xl"
               src="https://www.youtube.com/embed/Cui6NdK18qs?autoplay=1"
@@ -145,10 +466,10 @@
               allowfullscreen>
             </iframe>
           `;
-        }, { once: true });
-      }
-    });
-  </script>
+                }, { once: true });
+            }
+        });
+    </script>
 
 </body>
 
