@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+
     <title>Aprendé un Oficio Hoy</title>
 
     <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.tailwindcss.com"></script>
+
 
     <!-- Preconnect para acelerar Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,10 +28,12 @@
 
     <style>
         :root {
+            color-scheme: light !important;
+            forced-color-adjust: none !important;
             --verde-neon: #39ff88;
             --blanco: #ffffff;
             --gris-claro: #cccccc;
-            color-scheme: light;
+
         }
 
         body {
@@ -55,10 +60,25 @@
             transform: translateY(0) scale(1);
         }
 
+        video {
+            object-fit: contain !important;
+            background: #000;
+        }
+
         .video-block {
             box-shadow:
                 0 4px 10px rgba(0, 0, 0, 0.5),
                 inset 0 0 15px rgba(255, 255, 255, 0.05);
+        }
+
+        .blur-thumb {
+            filter: blur(5px);
+            transition: filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        .blur-thumb.hidden {
+            opacity: 0;
+            filter: blur(0px);
         }
     </style>
 </head>
@@ -78,18 +98,16 @@
             style="transition-delay: 0.05s;">
             Aprendé a afilar cuchillos<br class="hidden md:block"> y generá ingresos desde esta semana
         </h1>
-
         <!-- Video (placeholder hasta que el usuario haga clic) -->
         <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl" style="transition-delay: 0.15s;">
             <div id="video-container"
                 class="relative aspect-video bg-neutral-800 video-block rounded-xl overflow-hidden cursor-pointer">
 
-                <!-- Miniatura de YouTube -->
-                <img src="https://img.youtube.com/vi/Cui6NdK18qs/hqdefault.jpg" alt="Video: Aprendé un oficio hoy"
-                    class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <img id="video-poster" src="/static/miniatura.webp" alt="Aprendé a afilar cuchillos"
+                    class="w-full h-full object-cover blur-thumb" loading="lazy" decoding="async">
 
                 <!-- Capa oscura + botón de play -->
-                <div class="absolute inset-0 flex items-center justify-center">
+                <div id="play-overlay" class="absolute inset-0 flex items-center justify-center">
                     <div class="bg-black/60 rounded-full p-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -97,6 +115,14 @@
                         </svg>
                     </div>
                 </div>
+
+                <!-- VIDEO REAL (OCULTO HASTA QUE SE HACE CLICK) -->
+                <video id="landingVideo" class="absolute inset-0 w-full h-full hidden rounded-xl" controls playsinline
+                    webkit-playsinline controlsList="nodownload noplaybackrate" disablepictureinpicture preload="none"
+                    loading="lazy">
+                    <source src="/static/video.mp4" type="video/mp4">
+                </video>
+
             </div>
         </div>
 
@@ -494,8 +520,6 @@
         </section>
 
     </div>
-
-    <!-- Animación de entrada + video -->
     <script>
         function runEntranceAnimation() {
             const elements = document.querySelectorAll('.animate-in-element');
@@ -503,106 +527,115 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Animación de entrada apenas el DOM está listo
             runEntranceAnimation();
 
-            // Cargar YouTube SOLO cuando el usuario hace clic
             const videoContainer = document.getElementById('video-container');
-            if (videoContainer) {
+            const video = document.getElementById('landingVideo');
+            const poster = document.getElementById('video-poster');
+            const overlay = document.getElementById('play-overlay');
+
+            if (videoContainer && video) {
                 videoContainer.addEventListener('click', () => {
-                    videoContainer.innerHTML = `
-            <iframe
-              class="absolute inset-0 w-full h-full rounded-xl"
-              src="https://www.youtube.com/embed/Cui6NdK18qs?autoplay=1"
-              title="Video"
-              frameborder="0"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          `;
+
+                    // Oculta miniatura + overlay
+                    if (poster) poster.classList.add('hidden');
+                    if (overlay) overlay.classList.add('hidden');
+
+                    // FIX: evitar que el video gire o pase a fullscreen
+                    video.setAttribute('playsinline', '');
+                    video.setAttribute('webkit-playsinline', '');
+
+                    // Mostrar video
+                    video.classList.remove('hidden');
+
+                    // Reproducir
+                    video.play();
+
                 }, { once: true });
             }
         });
     </script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const slider = document.querySelector('#testimonios-slider');
-    if (!slider) return;
 
-    const cards = Array.from(slider.querySelectorAll('article'));
-    if (cards.length === 0) return;
 
-    const arrowLeft = document.querySelector('#arrow-left');
-    const arrowRight = document.querySelector('#arrow-right');
 
-    let currentIndex = 0;
-    let autoSlideTimer;
-    let userInteracted = false;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('#testimonios-slider');
+            if (!slider) return;
 
-    const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+            const cards = Array.from(slider.querySelectorAll('article'));
+            if (cards.length === 0) return;
 
-    function goToIndex(index) {
-        if (!isMobile()) return;
-        const cardWidth = slider.clientWidth;
-        slider.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
-    }
+            const arrowLeft = document.querySelector('#arrow-left');
+            const arrowRight = document.querySelector('#arrow-right');
 
-    function next() {
-        currentIndex = (currentIndex + 1) % cards.length;
-        goToIndex(currentIndex);
-    }
+            let currentIndex = 0;
+            let autoSlideTimer;
+            let userInteracted = false;
 
-    function prev() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        goToIndex(currentIndex);
-    }
+            const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
 
-    function startAutoSlide() {
-        clearInterval(autoSlideTimer);
-        if (!isMobile()) return;
+            function goToIndex(index) {
+                if (!isMobile()) return;
+                const cardWidth = slider.clientWidth;
+                slider.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
+            }
 
-        autoSlideTimer = setInterval(() => {
-            if (!isMobile()) return;
-            if (userInteracted) return;
-            next();
-        }, 4000); // 4 segundos
-    }
+            function next() {
+                currentIndex = (currentIndex + 1) % cards.length;
+                goToIndex(currentIndex);
+            }
 
-    function markInteraction() {
-        if (!isMobile()) return;
-        userInteracted = true;
+            function prev() {
+                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+                goToIndex(currentIndex);
+            }
 
-        clearTimeout(slider._interactionTimeout);
-        slider._interactionTimeout = setTimeout(() => {
-            userInteracted = false;
-        }, 4000); // vuelve a auto-slide en 4s
-    }
+            function startAutoSlide() {
+                clearInterval(autoSlideTimer);
+                if (!isMobile()) return;
 
-    // SOLO contamos interacción real del usuario
-    slider.addEventListener('touchstart', markInteraction, { passive: true });
-    slider.addEventListener('touchmove', markInteraction, { passive: true });
-    slider.addEventListener('touchend', markInteraction, { passive: true });
+                autoSlideTimer = setInterval(() => {
+                    if (!isMobile()) return;
+                    if (userInteracted) return;
+                    next();
+                }, 4000); // 4 segundos
+            }
 
-    // Flechas
-    if (arrowLeft) {
-        arrowLeft.addEventListener('click', () => {
-            markInteraction();
-            prev();
+            function markInteraction() {
+                if (!isMobile()) return;
+                userInteracted = true;
+
+                clearTimeout(slider._interactionTimeout);
+                slider._interactionTimeout = setTimeout(() => {
+                    userInteracted = false;
+                }, 4000); // vuelve a auto-slide en 4s
+            }
+
+            // SOLO contamos interacción real del usuario
+            slider.addEventListener('touchstart', markInteraction, { passive: true });
+            slider.addEventListener('touchmove', markInteraction, { passive: true });
+            slider.addEventListener('touchend', markInteraction, { passive: true });
+
+            // Flechas
+            if (arrowLeft) {
+                arrowLeft.addEventListener('click', () => {
+                    markInteraction();
+                    prev();
+                });
+            }
+            if (arrowRight) {
+                arrowRight.addEventListener('click', () => {
+                    markInteraction();
+                    next();
+                });
+            }
+
+            window.addEventListener('resize', startAutoSlide);
+
+            startAutoSlide();
         });
-    }
-    if (arrowRight) {
-        arrowRight.addEventListener('click', () => {
-            markInteraction();
-            next();
-        });
-    }
-
-    window.addEventListener('resize', startAutoSlide);
-
-    startAutoSlide();
-});
-</script>
+    </script>
 
 
 </body>
