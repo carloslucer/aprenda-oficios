@@ -9,8 +9,7 @@
     <title>Aprendé un Oficio Hoy</title>
 
     <!-- Tailwind CDN -->
-   <script src="https://cdn.tailwindcss.com"></script>
-
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Preconnect para acelerar Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +32,6 @@
             --verde-neon: #39ff88;
             --blanco: #ffffff;
             --gris-claro: #cccccc;
-
         }
 
         body {
@@ -81,6 +79,36 @@
             filter: blur(0px);
         }
     </style>
+
+    <!-- Meta Pixel ÚNICO -->
+    <script>
+        !(function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod
+                    ? n.callMethod.apply(n, arguments)
+                    : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = "2.0";
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+        })(
+            window,
+            document,
+            "script",
+            "https://connect.facebook.net/en_US/fbevents.js"
+        );
+        fbq("init", "1391437049213390");
+        fbq("track", "PageView");
+    </script>
+
 </head>
 
 <body class="relative min-h-screen flex flex-col items-center justify-center md:justify-start overflow-x-hidden">
@@ -98,6 +126,7 @@
             style="transition-delay: 0.05s;">
             Aprendé a afilar cuchillos<br class="hidden md:block"> y generá ingresos desde esta semana
         </h1>
+
         <!-- Video (placeholder hasta que el usuario haga clic) -->
         <div class="animate-in-element w-full rounded-xl overflow-hidden shadow-2xl" style="transition-delay: 0.15s;">
             <div id="video-container"
@@ -137,7 +166,6 @@
             style="transition-delay: 0.35s; background-color: var(--verde-neon);">
             QUIERO APRENDER A AFILAR HOY
         </a>
-
 
         <!-- Icono acceso inmediato -->
         <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
@@ -245,7 +273,6 @@
                         style="transition-delay: 0.35s; background-color: var(--verde-neon);">
                         QUIERO EMPEZAR EL CURSO HOY
                     </a>
-
 
                     <div class="animate-in-element flex items-center gap-2 text-sm md:text-xs text-[#cccccc]/80"
                         style="transition-delay: 0.50s">
@@ -520,6 +547,8 @@
         </section>
 
     </div>
+
+    <!-- Animaciones + VIDEO + EVENTOS META -->
     <script>
         function runEntranceAnimation() {
             const elements = document.querySelectorAll('.animate-in-element');
@@ -536,7 +565,6 @@
 
             if (videoContainer && video) {
                 videoContainer.addEventListener('click', () => {
-
                     // Oculta miniatura + overlay
                     if (poster) poster.classList.add('hidden');
                     if (overlay) overlay.classList.add('hidden');
@@ -551,13 +579,41 @@
                     // Reproducir
                     video.play();
 
+                    // 🔹 Evento META: ViewContent al iniciar el video
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'ViewContent', {
+                            content_name: 'VSL - Curso Afilador',
+                            content_type: 'video'
+                        });
+                    }
+
                 }, { once: true });
+            }
+
+            // 🔹 Eventos META: AddToCart + InitiateCheckout en TODOS los botones que van a Hotmart
+            const hotmartCtas = document.querySelectorAll('a[href*="pay.hotmart.com/K102935684J"]');
+            if (hotmartCtas.length > 0) {
+                hotmartCtas.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (typeof fbq === 'function') {
+                            fbq('track', 'AddToCart', {
+                                content_name: 'Curso Afilador Profesional',
+                                value: 0,
+                                currency: 'ARS'
+                            });
+                            fbq('track', 'InitiateCheckout', {
+                                content_name: 'Curso Afilador Profesional',
+                                value: 0,
+                                currency: 'ARS'
+                            });
+                        }
+                    });
+                });
             }
         });
     </script>
 
-
-
+    <!-- Slider testimonios -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const slider = document.querySelector('#testimonios-slider');
@@ -636,7 +692,6 @@
             startAutoSlide();
         });
     </script>
-
 
 </body>
 
