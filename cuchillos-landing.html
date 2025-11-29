@@ -670,6 +670,21 @@
             }
         });
     </script>
+    
+
+    <script>
+    const wppBtn = document.getElementById('btn-whatsapp');
+    if (wppBtn) {
+        wppBtn.addEventListener('click', () => {
+            if (typeof fbq === 'function') {
+                fbq('track', 'Contact', {
+                    content_name: 'WhatsApp - Curso Afilador',
+                });
+            }
+        });
+    }
+</script>
+
 
     <!-- Slider testimonios -->
     <script>
